@@ -4,7 +4,8 @@ import LogIn from '../views/LogIn.vue';
 import SignUp from '../views/SignUp.vue';
 import LittleCleanig from '../views/LittleCleaning.vue';
 import StockManagement from '../views/StockManagement.vue';
-import StockManagementDetail from '../views/StockManagementDetail.vue'
+import StockManagementDetail from '../views/StockManagementDetail.vue';
+import store from "../store/index";
 
 Vue.use(VueRouter)
 
@@ -40,6 +41,22 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
-})
+});
+
+router.beforeEach((to, from, next) => {
+  if (
+    to.matched.some((record) => record.meta.requiresAuth) &&
+    !store.state.auth
+  ) {
+    next({
+      path: "/",
+      query: {
+        redirect: to.fullPath,
+      },
+    });
+  } else {
+    next();
+  }
+});
 
 export default router;
