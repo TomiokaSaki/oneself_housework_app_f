@@ -9,13 +9,16 @@
       <ul>
         <li class="id">
           <label for="ID">ID:</label>
-          <input type="email" />
+          <input type="email" v-model="email" />
         </li>
         <li class="password">
           <label for="Password">Password:</label>
-          <input type="password" />
+          <input type="password" v-model="password" />
         </li>
       </ul>
+    </div>
+    <div class="signup_btn">
+      <button @click="auth">SignUp</button>
     </div>
     <div id="login">
       <h1 @click="$router.push('/')">LogIn</h1>
@@ -24,7 +27,31 @@
 </template>
 
 <script>
-
+import axios from "axios";
+export default {
+    data() {
+    return {
+      email: "",
+      password: ""
+    };
+  },
+  methods: {
+    auth() {
+      axios
+        .post("https://intense-castle-74582.herokuapp.com/api/register", {
+          email: this.email,
+          password: this.password
+        })
+        .then(response => {
+          console.log(response);
+          this.$router.replace("/");
+        })
+        .catch(error => {
+          alert(error);
+        });
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -57,7 +84,7 @@ input {
   background: #F9F8E4;
   position: absolute;
   right: 0;
-  
+  color: #5C6063;
 }
 #form {
   position: relative;
@@ -71,7 +98,21 @@ label {
 .id {
   margin: 2vw 0;
 }
-
+.signup_btn {
+  text-align: center;
+  margin: 50px 0;
+}
+button {
+  color: #F9F8E4;
+  font-size: 1.5rem;
+  background: #70B2DE;
+  border: none;
+  border-radius: 1rem;
+  width: 10rem;
+  height: 3rem;
+  margin: 0 auto;
+  cursor: pointer;
+}
 #login {
   text-align: center;
   margin-top: 70px;

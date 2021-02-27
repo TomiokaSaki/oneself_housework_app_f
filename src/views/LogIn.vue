@@ -17,6 +17,9 @@
         </li>
       </ul>
     </div>
+    <div class="login_btn">
+      <button @click="auth">LogIn</button>
+    </div>
     <div id="signup">
       <h1 @click="$router.push('/signup')">SignUp</h1>
     </div>
@@ -24,7 +27,22 @@
 </template>
 
 <script>
-
+export default {
+  data() {
+    return {
+      email: "",
+      password: ""
+    };
+  },
+  methods: {
+    auth() {
+      this.$store.dispatch("login", {
+        email: this.email,
+        password: this.password
+      });
+    }
+  }
+};
 </script>
 
 <style scoped>
@@ -71,7 +89,21 @@ label {
 .id {
   margin: 2vw 0;
 }
-
+.login_btn {
+  text-align: center;
+  margin: 50px 0;
+}
+button {
+  color: #F9F8E4;
+  font-size: 1.5rem;
+  background: #70B2DE;
+  border: none;
+  border-radius: 1rem;
+  width: 10rem;
+  height: 3rem;
+  margin: 0 auto;
+  cursor: pointer;
+}
 #signup {
   text-align: center;
   margin-top: 70px;

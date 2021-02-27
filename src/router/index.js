@@ -2,7 +2,8 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import LogIn from '../views/LogIn.vue';
 import SignUp from '../views/SignUp.vue';
-import LittleCleanig from '../views/LittleCleaning.vue';
+import LittleCleaning from '../views/LittleCleaning.vue';
+
 import StockManagement from '../views/StockManagement.vue';
 import StockManagementDetail from '../views/StockManagementDetail.vue';
 import store from "../store/index";
@@ -23,8 +24,10 @@ const routes = [
   {
     path: '/little_cleaning',
     name: 'LittleCleaning',
-    component: LittleCleanig,
+    component: LittleCleaning,
   },
+
+
   {
     path: '/stock_management',
     name: 'StockManagement',
